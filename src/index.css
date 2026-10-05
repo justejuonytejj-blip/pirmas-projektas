@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+  --text: #5d7384;
+  --text-h: #163a56;
+  --bg: rgba(255, 255, 255, 0.92);
+  --card: rgba(255, 255, 255, 0.86);
+  --border: rgba(148, 175, 188, 0.45);
+  --accent: #2c8a96;
+  --accent-hover: #247a85;
+  --shadow: 0 16px 40px rgba(22, 58, 86, 0.12);
+  --sans: 'Plus Jakarta Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+  font: 16px/1.5 var(--sans);
+  color: var(--text);
+  background: #c9e7ef;
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+h1,
+h2 {
+  font-family: var(--sans);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #2c8a96;
+  outline-offset: 3px;
+}

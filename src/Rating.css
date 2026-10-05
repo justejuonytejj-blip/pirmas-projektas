@@ -1,0 +1,168 @@
+.rating {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: 8px;
+  position: relative;
+}
+
+.rating-copy {
+  min-width: 0;
+  grid-column: 1 / -1;
+  padding-right: 84px;
+}
+
+.rating h2 {
+  margin: 0;
+  font-size: 1.18rem;
+}
+
+.rating-art {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.birds {
+  width: 48px;
+  height: 16px;
+  margin-right: 6px;
+}
+
+.signpost {
+  width: 72px;
+  height: 56px;
+}
+
+.rating-destination {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  padding-right: 84px;
+}
+
+.rating-destination label {
+  color: var(--text-h);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.rating-destination input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #d5e2e8;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text-h);
+}
+
+.rating-destination input::placeholder {
+  color: #94a8b4;
+  opacity: 1;
+}
+
+.rating-options {
+  grid-column: 1 / -1;
+}
+
+.rating-option {
+  margin-top: 4px;
+}
+
+.rating-option .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.rating-option:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.rating-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  grid-column: 1 / -1;
+  margin-top: 16px;
+}
+
+.rating-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid #d5e2e8;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text-h);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rating-filter span {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(44, 138, 150, 0.12);
+  color: #1f6f7c;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.rating-filter.active {
+  border-color: transparent;
+  background: var(--accent);
+  color: #fff;
+}
+
+.rating-filter.active span {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.rating-results {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+}
+
+.rating-results .place-badge {
+  cursor: default;
+}
+
+.rating-empty {
+  grid-column: 1 / -1;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(44, 138, 150, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--text-h);
+  font-weight: 650;
+}
+
+@media (max-width: 420px) {
+  .signpost {
+    width: 58px;
+    height: 46px;
+  }
+
+  .rating-copy,
+  .rating-destination {
+    padding-right: 68px;
+  }
+
+  .rating h2 {
+    font-size: 1.05rem;
+  }
+}
