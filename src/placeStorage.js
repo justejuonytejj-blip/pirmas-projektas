@@ -58,6 +58,7 @@ export function normalizePlace(place) {
     country: place.country || '',
     image: place.image || null,
     status: normalizeStatus(place.status),
+    favorite: place.favorite === true,
   }
 }
 

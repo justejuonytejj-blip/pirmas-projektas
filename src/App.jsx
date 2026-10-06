@@ -66,7 +66,21 @@ function MoreIcon() {
   )
 }
 
-function PlaceRow({ place, onSave, onDelete, onStatusChange }) {
+function StarIcon({ filled }) {
+  return (
+    <svg className="place-favorite-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill={filled ? 'currentColor' : 'none'}
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+        d="M12 3.6 14.6 9l5.9.7-4.4 4 1.2 5.8L12 16.8 6.7 19.5l1.2-5.8-4.4-4 5.9-.7Z"
+      />
+    </svg>
+  )
+}
+
+function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [editing, setEditing] = useState(false)
   const [editName, setEditName] = useState(place.name)
@@ -220,6 +234,19 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange }) {
       >
         {isVisited ? '✅ Aplankyta' : '❤️ Noriu aplankyti'}
       </button>
+      <button
+        type="button"
+        className={`place-favorite${place.favorite ? ' is-favorite' : ''}`}
+        aria-pressed={Boolean(place.favorite)}
+        aria-label={
+          place.favorite
+            ? `Pašalinti iš mėgstamiausių: ${place.name}`
+            : `Pažymėti kaip mėgstamiausią: ${place.name}`
+        }
+        onClick={() => onFavoriteChange(place.id)}
+      >
+        <StarIcon filled={Boolean(place.favorite)} />
+      </button>
       <div className="place-menu" ref={menuRef}>
         <button
           type="button"
@@ -286,6 +313,7 @@ function App() {
         city: trimmedCity,
         country: trimmedCountry,
         status: WANT_STATUS,
+        favorite: false,
         image: null,
       },
     ])
@@ -362,6 +390,14 @@ function App() {
     )
   }
 
+  function handleFavoriteChange(id) {
+    setPlaces((current) =>
+      current.map((place) =>
+        place.id === id ? { ...place, favorite: !place.favorite } : place,
+      ),
+    )
+  }
+
   function openAllPlaces() {
     setSearch('')
     setCategoryFilter('all')
@@ -386,6 +422,7 @@ function App() {
           onSave={handleSavePlace}
           onDelete={handleDeletePlace}
           onStatusChange={handleStatusChange}
+          onFavoriteChange={handleFavoriteChange}
         />
       ))}
     </ul>
