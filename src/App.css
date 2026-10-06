@@ -320,6 +320,31 @@
   font-size: 0.72rem;
   font-weight: 500;
   line-height: 1.35;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.place-note.is-expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.place-note-toggle {
+  justify-self: start;
+  margin: 2px 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #1f6f7c;
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.place-note-toggle:hover {
+  color: var(--accent);
 }
 
 .place-badge {

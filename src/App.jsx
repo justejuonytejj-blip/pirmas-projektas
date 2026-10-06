@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import './App.css'
 import RandomPlace from './Rating.jsx'
 import { findPlaceImage } from './findPlaceImage.js'
@@ -80,12 +80,6 @@ function StarIcon({ filled }) {
   )
 }
 
-function previewNotes(notes) {
-  const text = (notes || '').trim().replace(/\s+/g, ' ')
-  if (!text) return ''
-  return text.length > 72 ? `${text.slice(0, 72).trimEnd()}…` : text
-}
-
 function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [editing, setEditing] = useState(false)
@@ -94,8 +88,12 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange })
   const [editCity, setEditCity] = useState(place.city || '')
   const [editCountry, setEditCountry] = useState(place.country || '')
   const [editNotes, setEditNotes] = useState(place.notes || '')
+  const [notesExpanded, setNotesExpanded] = useState(false)
+  const [notesOverflows, setNotesOverflows] = useState(false)
   const menuRef = useRef(null)
+  const noteRef = useRef(null)
   const isVisited = place.status === VISITED_STATUS
+  const fullNote = (place.notes || '').trim()
 
   useEffect(() => {
     if (!menuOpen) return
@@ -118,6 +116,22 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange })
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [menuOpen])
+
+  useEffect(() => {
+    setNotesExpanded(false)
+  }, [fullNote])
+
+  useLayoutEffect(() => {
+    if (!fullNote || notesExpanded) return
+
+    const el = noteRef.current
+    if (!el) {
+      setNotesOverflows(false)
+      return
+    }
+
+    setNotesOverflows(el.scrollHeight > el.clientHeight + 1)
+  }, [fullNote, notesExpanded])
 
   function startEdit() {
     setEditName(place.name)
@@ -237,8 +251,24 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange })
             {[place.city, place.country].filter(Boolean).join(', ')}
           </span>
         )}
-        {previewNotes(place.notes) && (
-          <p className="place-note">{previewNotes(place.notes)}</p>
+        {fullNote && (
+          <>
+            <p
+              ref={noteRef}
+              className={`place-note${notesExpanded ? ' is-expanded' : ''}`}
+            >
+              {fullNote}
+            </p>
+            {notesOverflows && (
+              <button
+                type="button"
+                className="place-note-toggle"
+                onClick={() => setNotesExpanded((open) => !open)}
+              >
+                {notesExpanded ? 'Rodyti mažiau' : 'Rodyti daugiau'}
+              </button>
+            )}
+          </>
         )}
       </div>
       <button
