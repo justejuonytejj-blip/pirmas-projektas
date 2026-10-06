@@ -80,9 +80,11 @@ function RandomPlace({ places }) {
   const visitedCount = matches.filter(
     (place) => place.status === VISITED_STATUS,
   ).length
+  const favoriteCount = matches.filter((place) => place.favorite === true).length
   const visiblePlaces = matches.filter((place) => {
     if (statusFilter === 'want') return place.status !== VISITED_STATUS
     if (statusFilter === 'visited') return place.status === VISITED_STATUS
+    if (statusFilter === 'favorite') return place.favorite === true
     return true
   })
 
@@ -182,6 +184,16 @@ function RandomPlace({ places }) {
             >
               ✅ Aplankytos
               <span>{visitedCount}</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={statusFilter === 'favorite'}
+              className={`rating-filter${statusFilter === 'favorite' ? ' active' : ''}`}
+              onClick={() => setStatusFilter('favorite')}
+            >
+              ⭐ Mėgstamiausios
+              <span>{favoriteCount}</span>
             </button>
           </div>
 
