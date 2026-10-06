@@ -491,10 +491,20 @@ function App() {
         <aside className="sidebar">
           <p className="sidebar-brand">Mano vietos</p>
           <nav className="sidebar-nav" aria-label="Pagrindinė navigacija">
-            <button type="button" className="sidebar-link">
+            <button
+              type="button"
+              className="sidebar-link"
+              aria-current={view === 'home' ? 'page' : undefined}
+              onClick={() => setView('home')}
+            >
               Pagrindinis
             </button>
-            <button type="button" className="sidebar-link">
+            <button
+              type="button"
+              className="sidebar-link"
+              aria-current={view === 'all' ? 'page' : undefined}
+              onClick={openAllPlaces}
+            >
               Visos vietos
             </button>
           </nav>
