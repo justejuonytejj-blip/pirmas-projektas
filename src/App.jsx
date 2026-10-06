@@ -464,7 +464,7 @@ function App() {
         ) : (
           <>
         <header className="intro">
-          <h1>Mano vietos</h1>
+          <h1>Atrask vietas</h1>
           <svg className="wave" viewBox="0 0 120 12" aria-hidden="true">
             <path
               d="M2 8c8-8 16 8 24 0s16 8 24 0 16 8 24 0 16 8 24 0 16 8 24 0"
