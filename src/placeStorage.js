@@ -59,6 +59,7 @@ export function normalizePlace(place) {
     image: place.image || null,
     status: normalizeStatus(place.status),
     favorite: place.favorite === true,
+    notes: typeof place.notes === 'string' ? place.notes : '',
   }
 }
 

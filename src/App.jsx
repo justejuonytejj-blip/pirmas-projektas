@@ -80,6 +80,12 @@ function StarIcon({ filled }) {
   )
 }
 
+function previewNotes(notes) {
+  const text = (notes || '').trim().replace(/\s+/g, ' ')
+  if (!text) return ''
+  return text.length > 72 ? `${text.slice(0, 72).trimEnd()}…` : text
+}
+
 function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [editing, setEditing] = useState(false)
@@ -87,6 +93,7 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange })
   const [editCategory, setEditCategory] = useState(place.category)
   const [editCity, setEditCity] = useState(place.city || '')
   const [editCountry, setEditCountry] = useState(place.country || '')
+  const [editNotes, setEditNotes] = useState(place.notes || '')
   const menuRef = useRef(null)
   const isVisited = place.status === VISITED_STATUS
 
@@ -117,6 +124,7 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange })
     setEditCategory(place.category)
     setEditCity(place.city || '')
     setEditCountry(place.country || '')
+    setEditNotes(place.notes || '')
     setEditing(true)
     setMenuOpen(false)
   }
@@ -127,6 +135,7 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange })
     setEditCategory(place.category)
     setEditCity(place.city || '')
     setEditCountry(place.country || '')
+    setEditNotes(place.notes || '')
   }
 
   async function saveEdit(event) {
@@ -140,6 +149,7 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange })
       category: editCategory,
       city: editCity.trim(),
       country: editCountry.trim(),
+      notes: editNotes.trim(),
       previousName: place.name,
     })
     setEditing(false)
@@ -189,6 +199,14 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange })
             onChange={(event) => setEditCountry(event.target.value)}
             placeholder="Pvz. Lietuva"
           />
+          <label htmlFor={`edit-notes-${place.id}`}>Pastabos</label>
+          <textarea
+            id={`edit-notes-${place.id}`}
+            value={editNotes}
+            onChange={(event) => setEditNotes(event.target.value)}
+            rows={3}
+            placeholder="Trumpi įspūdžiai, patarimai ar priminimai"
+          />
           <div className="place-edit-actions">
             <button type="button" className="place-edit-cancel" onClick={cancelEdit}>
               Atšaukti
@@ -218,6 +236,9 @@ function PlaceRow({ place, onSave, onDelete, onStatusChange, onFavoriteChange })
           <span className="place-location">
             {[place.city, place.country].filter(Boolean).join(', ')}
           </span>
+        )}
+        {previewNotes(place.notes) && (
+          <p className="place-note">{previewNotes(place.notes)}</p>
         )}
       </div>
       <button
@@ -283,6 +304,7 @@ function App() {
   const [category, setCategory] = useState(CATEGORIES[0])
   const [city, setCity] = useState('')
   const [country, setCountry] = useState('')
+  const [notes, setNotes] = useState('')
   const [places, setPlaces] = useState(() => loadPlaces(EXAMPLE_PLACES))
   const [view, setView] = useState('home')
   const [search, setSearch] = useState('')
@@ -303,6 +325,7 @@ function App() {
     const selectedCategory = category
     const trimmedCity = city.trim()
     const trimmedCountry = country.trim()
+    const trimmedNotes = notes.trim()
 
     setPlaces((current) => [
       ...current,
@@ -314,6 +337,7 @@ function App() {
         country: trimmedCountry,
         status: WANT_STATUS,
         favorite: false,
+        notes: trimmedNotes,
         image: null,
       },
     ])
@@ -322,6 +346,7 @@ function App() {
     setCategory(CATEGORIES[0])
     setCity('')
     setCountry('')
+    setNotes('')
 
     const image = await findPlaceImage({
       name: trimmedName,
@@ -348,6 +373,7 @@ function App() {
               category: updates.category,
               city: updates.city,
               country: updates.country,
+              notes: updates.notes ?? place.notes,
               image:
                 updates.name !== updates.previousName ||
                 updates.city !== (previous?.city || '') ||
@@ -570,6 +596,15 @@ function App() {
               />
             </div>
           </div>
+
+          <label htmlFor="place-notes">Pastabos</label>
+          <textarea
+            id="place-notes"
+            value={notes}
+            onChange={(event) => setNotes(event.target.value)}
+            rows={3}
+            placeholder="Trumpi įspūdžiai, patarimai ar priminimai"
+          />
 
           <button type="submit">
             <span className="btn-plus" aria-hidden="true">

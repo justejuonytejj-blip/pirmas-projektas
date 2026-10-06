@@ -157,7 +157,8 @@
 }
 
 .card input,
-.card select {
+.card select,
+.card textarea {
   width: 100%;
   min-height: 48px;
   padding: 12px 14px;
@@ -167,7 +168,15 @@
   color: var(--text-h);
 }
 
-.card input::placeholder {
+.card textarea {
+  min-height: 84px;
+  resize: vertical;
+  font: inherit;
+  line-height: 1.4;
+}
+
+.card input::placeholder,
+.card textarea::placeholder {
   color: #94a8b4;
   opacity: 1;
 }
@@ -296,6 +305,21 @@
   width: 12px;
   height: 12px;
   color: #7f96a4;
+}
+
+.place-note {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 2px 0 0;
+  padding: 5px 8px;
+  border-radius: 10px;
+  background: rgba(44, 138, 150, 0.08);
+  color: #5d7384;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .place-badge {
@@ -514,7 +538,8 @@
 }
 
 .place-edit input,
-.place-edit select {
+.place-edit select,
+.place-edit textarea {
   width: 100%;
   min-height: 42px;
   padding: 8px 12px;
@@ -523,6 +548,12 @@
   background: #fff;
   color: var(--text-h);
   font: inherit;
+}
+
+.place-edit textarea {
+  min-height: 72px;
+  resize: vertical;
+  line-height: 1.4;
 }
 
 .place-edit-actions {
