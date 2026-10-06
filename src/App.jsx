@@ -66,6 +66,34 @@ function MoreIcon() {
   )
 }
 
+function MenuIcon({ open }) {
+  if (open) {
+    return (
+      <svg className="nav-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          d="M6 6l12 12M18 6 6 18"
+        />
+      </svg>
+    )
+  }
+
+  return (
+    <svg className="nav-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        d="M4 7h16M4 12h16M4 17h16"
+      />
+    </svg>
+  )
+}
+
 function StarIcon({ filled }) {
   return (
     <svg className="place-favorite-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -337,12 +365,36 @@ function App() {
   const [notes, setNotes] = useState('')
   const [places, setPlaces] = useState(() => loadPlaces(EXAMPLE_PLACES))
   const [view, setView] = useState('home')
+  const [navOpen, setNavOpen] = useState(false)
   const [search, setSearch] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('all')
+  const mobileNavRef = useRef(null)
 
   useEffect(() => {
     savePlaces(places)
   }, [places])
+
+  useEffect(() => {
+    if (!navOpen) return
+
+    function handlePointerDown(event) {
+      if (!mobileNavRef.current?.contains(event.target)) {
+        setNavOpen(false)
+      }
+    }
+
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') setNavOpen(false)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [navOpen])
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -488,6 +540,48 @@ function App() {
     <main className="page">
       <img className="page-bg" src={coastBg} alt="" />
       <div className="page-layout">
+        <div className="mobile-bar" ref={mobileNavRef}>
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-label={navOpen ? 'Uždaryti meniu' : 'Atidaryti meniu'}
+            aria-expanded={navOpen}
+            aria-controls="mobile-nav-panel"
+            onClick={() => setNavOpen((open) => !open)}
+          >
+            <MenuIcon open={navOpen} />
+          </button>
+          {navOpen && (
+            <nav
+              id="mobile-nav-panel"
+              className="mobile-nav-panel"
+              aria-label="Pagrindinė navigacija"
+            >
+              <button
+                type="button"
+                className="sidebar-link"
+                aria-current={view === 'home' ? 'page' : undefined}
+                onClick={() => {
+                  setView('home')
+                  setNavOpen(false)
+                }}
+              >
+                Pagrindinis
+              </button>
+              <button
+                type="button"
+                className="sidebar-link"
+                aria-current={view === 'all' ? 'page' : undefined}
+                onClick={() => {
+                  openAllPlaces()
+                  setNavOpen(false)
+                }}
+              >
+                Visos vietos
+              </button>
+            </nav>
+          )}
+        </div>
         <aside className="sidebar">
           <p className="sidebar-brand">Mano vietos</p>
           <nav className="sidebar-nav" aria-label="Pagrindinė navigacija">
