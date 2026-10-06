@@ -487,7 +487,19 @@ function App() {
   return (
     <main className="page">
       <img className="page-bg" src={coastBg} alt="" />
-      <section className="places">
+      <div className="page-layout">
+        <aside className="sidebar">
+          <p className="sidebar-brand">Mano vietos</p>
+          <nav className="sidebar-nav" aria-label="Pagrindinė navigacija">
+            <button type="button" className="sidebar-link">
+              Pagrindinis
+            </button>
+            <button type="button" className="sidebar-link">
+              Visos vietos
+            </button>
+          </nav>
+        </aside>
+        <section className="places">
         {view === 'all' ? (
           <>
             <header className="intro">
@@ -668,7 +680,8 @@ function App() {
         <RandomPlace places={places} />
           </>
         )}
-      </section>
+        </section>
+      </div>
     </main>
   )
 }
