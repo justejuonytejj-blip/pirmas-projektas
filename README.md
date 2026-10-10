@@ -13,7 +13,7 @@
 - **Naudoti „Kur keliaujam šiandien?“:** įvesti miestą ar šalį, rasti toje vietovėje išsaugotas vietas ir filtruoti rezultatus: **Visos**, **Noriu aplankyti**, **Aplankytos**, **Mėgstamiausios**. Kiekvienas filtras rodo atitinkančių vietų skaičių.
 - **Gauti automatiškai surastą paveikslėlį:** pridėjus vietą arba pakeitus jos pavadinimą / miestą / šalį, programa mėgina surasti nuotrauką per išorinius viešus šaltinius.
 
-Sąsaja turi dvi skiltis – **Pagrindinis** ir **Visos vietos**. Kompiuteryje navigacija yra kairėje, mažesniuose ekranuose – išskleidžiamame meniu. Perjungimas vyksta React būsena (`view`), be puslapio perkrovimo ir be React Router.
+Sąsaja turi dvi skiltis – **Pagrindinis** ir **Visos vietos**. Kompiuteryje jos yra viršutinėje horizontalioje juostoje (kairėje „Mano vietos“ su bangele, dešinėje mygtukai su ikonomis). Mažesniuose ekranuose juosta lieka kompaktiška: pavadinimas ir hamburgerio meniu. Meniu užsidaro pasirinkus skiltį, paspaudus už jo ribų arba `Escape`. Perjungimas vyksta React būsena (`view`), be puslapio perkrovimo ir be React Router.
 
 ## Vietų kategorijos
 
@@ -123,7 +123,9 @@ Pakeitus vietos **pavadinimą, miestą ar šalį**, ankstesnis paveikslėlis pa�
 
 ## Dizainas
 
-Dizainas paremtas pajūrio nuotrauka, šviesiomis pusiau permatomomis kortelėmis, „glassmorphism“ / `backdrop-filter: blur(...)` efektu, užapvalintais kampais, tamsiai mėlynu tekstu ir melsvai žaliu akcentu. Naudojamas **Plus Jakarta Sans** šriftas. Responsive taisyklės pritaiko išdėstymą mažiems ekranams.
+Dizainas paremtas pajūrio nuotrauka, šviesiomis pusiau permatomomis kortelėmis, „glassmorphism“ / `backdrop-filter: blur(...)` efektu, užapvalintais kampais, tamsiai mėlynu tekstu (`#163a56`) ir melsvai žaliu akcentu (`#2c8a96`). Naudojamas **Plus Jakarta Sans** šriftas.
+
+Viršutinė navigacija yra plati ir žema (apie 72 px), pusiau permatoma, su blur ir subtiliu šešėliu. Aktyvus mygtukas – melsvai žalias, neaktyvus – šviesus. Po juosta turinys centruotas: antraštė „Atrask vietas“, vietos pridėjimo forma (kompiuteryje apie 530 px), „Išsaugotos vietos“ ir „Kur keliaujam šiandien?“. Iki 720 px pločio kortelės ir forma prisitaiko prie ekrano be horizontalaus slinkimo.
 
 ## Techninės ribos ir ateities galimybės
 
@@ -135,4 +137,4 @@ Dabartinė programėlė yra **frontend-only**, skirta asmeniniam naudojimui; be 
 - **`README.md`** – suprantama projekto apžvalga ir paleidimo instrukcijos.
 - **`agent.md`** – instrukcijos AI agentui, kurios neturi prieštarauti dabartiniam kodui.
 
-**Paskutinį kartą atnaujinta:** 2026-10-10 pagal pateiktus šaltinio failus. Funkcijos aprašytos pagal kodą; atskiras veikiančios aplikacijos ar `npm run build` testas nebuvo atliktas.
+**Paskutinį kartą atnaujinta:** 2026-10-10. Navigacija pakeista iš šoninės juostos į viršutinę horizontalią juostą. Vietų funkcijos nepakito.

@@ -117,7 +117,7 @@ pirmas-projektas/ (arba dabartinis projekto aplankas)
 - visų vietų paiešką pagal pavadinimą ir kategorijos filtrą;
 - paveikslėlio automatinės paieškos paleidimą;
 - `view` principu veikiančią navigaciją tarp `home` ir `all`;
-- naują desktop **šoninę navigaciją** ir mobilų išskleidžiamą meniu.
+- horizontalią viršutinę navigaciją: kompiuteryje plačią juostą, telefone – kompaktišką juostą su hamburgerio meniu.
 
 Svarbios būsenos: `name`, `category`, `city`, `country`, `notes`, `places`, `view`, `navOpen`, `search`, `categoryFilter`. Naudojami `useState`, `useEffect`, `useLayoutEffect` ir `useRef`. `PlaceRow` lokaliai valdo trijų taškų meniu, redagavimo režimą ir pastabų išskleidimą.
 
@@ -228,7 +228,7 @@ Mygtukas „Peržiūrėti visas vietas“ atidaro atskirą visų vietų vaizdą.
 
 ## 14. „Visos vietos“ vaizdas
 
-Šoninės navigacijos arba „Peržiūrėti visas vietas“ mygtuku pasiekiamame vaizde:
+Viršutinės navigacijos arba „Peržiūrėti visas vietas“ mygtuku pasiekiamame vaizde:
 - rodomos visos išsaugotos vietos, pradedant naujausia;
 - galima ieškoti **pagal vietos pavadinimą**;
 - galima filtruoti **pagal kategoriją**;
@@ -300,8 +300,8 @@ Svarbu: šis paveikslėlių paieškos mechanizmas priklauso nuo išorinių vieš
 **Dabartinę dizaino kryptį būtina išlaikyti**, nebent vartotojas aiškiai prašo ją pakeisti. Dabartiniai 2026-10-10 ekranvaizdžiai yra vizualinis orientyras.
 
 - Pajūrio fotografija per visą ekraną (`coast-background.png`), kelionių nuotaika.
-- **Desktop**: du stulpeliai – kairėje šviesi permatoma **šoninė navigacija** (~220 px), dešinėje siauras turinio stulpelis (iki ~500 px). Bendro išdėstymo plotis iki ~1080 px.
-- `Pagrindinis` / `Visos vietos` pasirinkimai; aktyvus punktas paryškintas žalsvu fonu.
+- **Desktop**: šoninės juostos nėra. Viršuje plati, žema (~72 px) pusiau permatoma navigacijos juosta su blur, užapvalintais kampais ir subtiliu šešėliu. Kairėje – „Mano vietos“ ir bangelė, dešinėje – `🏠 Pagrindinis` ir `🗺️ Visos vietos`. Aktyvus mygtukas yra `#2c8a96`, neaktyvus – šviesus.
+- Po juosta turinys centruotas, iki ~530 px: antraštė „Atrask vietas“, aprašymas, forma, „Išsaugotos vietos“ ir „Kur keliaujam šiandien?“.
 - Šviesios pusiau permatomos kortelės su `backdrop-filter: blur(10px)`, dideliais apvalinimais, subtiliais šešėliais.
 - Vietos kortelėse yra mažos nuotraukos, būsenos žyma, mėgstamiausių žvaigždutė, papildomų veiksmų meniu ir (jei pridėtos) pastabos.
 - Teal / melsvai žalias mygtukų akcentas, tamsiai mėlynas tekstas.
@@ -323,7 +323,7 @@ Dizainą realizuoja `App.css`, `Rating.css` ir `index.css`. Nereikia jo pakeisti
 
 Responsive taisyklės yra `App.css` ir `Rating.css`.
 
-- **Iki 720 px**: desktop šoninė navigacija paslepiama, atsiranda mobilus meniu (hamburgerio mygtukas); meniu uždaromas pasirinkus vaizdą, paspaudus išorėje arba `Escape`.
+- **Iki 720 px**: vietoj mygtukų juostoje lieka „Mano vietos“ ir hamburgerio mygtukas. Paspaudus išsiskleidžia `Pagrindinis` ir `Visos vietos`. Meniu užsidaro pasirinkus vaizdą, paspaudus už jo ribų arba `Escape`. Kortelės ir forma telpa į ekrano plotį.
 - **Iki 520 px**: mažinami paddingai, kortelių kampai; miesto ir šalies laukeliai pereina į vieną stulpelį; vietos kortelių išdėstymas perorganizuojamas, kad tilptų žvaigždutė, meniu ir statusas.
 - **Iki 420 px** (`Rating.css`): mažinamos kelionės skilties iliustracijos ir koreguojamas turinio plotis.
 
@@ -402,7 +402,7 @@ Kodo kintamųjų, funkcijų ir komponentų pavadinimai gali likti anglų kalba.
 - atskiras visų vietų vaizdas, pavadinimo paieška ir kategorijos filtras;
 - redagavimas, ištrynimas, būsenos ir mėgstamiausių keitimas;
 - `Kur keliaujam šiandien?` paieška pagal miestą / šalį ir 4 rezultatų filtrai, įskaitant mėgstamiausias;
-- **desktop šoninė navigacija** ir **mobilus hamburgerio meniu**;
+- **horizontali viršutinė navigacija** kompiuteryje ir **mobilus hamburgerio meniu**;
 - lietuviška vartotojo sąsaja, responsive / glassmorphism dizainas.
 
 Pastaba: aukščiau nurodyta **iš kodo nustatyta funkcijų realizacija**, ne savarankiško paleidimo ar galutinio end-to-end testavimo rezultatai. Ekranvaizdyje rodomas vietų skaičius (pvz., 62) yra naršyklės duomenų būsena, ne iš anksto užkoduotas kiekis.
@@ -454,6 +454,11 @@ Nereikia kiekvieną kartą perrašyti viso failo. Keisti tik informaciją, kuri 
 - Patvirtinta, kad projektas lieka React + Vite su JavaScript / JSX ir paprastu CSS (React `^19.2.8`, Vite `^8.3.0` patikrinta pagal `package.json`).
 - Esamas programėlės kodas nekeistas; atnaujinti `context.md` ir `README.md`.
 
+### 2026-10-10 — navigacijos dizainas
+- Pašalinta kairioji šoninė navigacija. Vietoj jos – horizontali viršutinė juosta su `view` būsena (be React Router).
+- Kompiuteryje juostoje yra „Mano vietos“ su bangele ir mygtukai `Pagrindinis` / `Visos vietos`. Iki 720 px rodomas hamburgerio meniu.
+- Pagrindinis turinys sucentruotas, formos plotis apie 530 px. Vietų funkcijos ir `localStorage` nekeisti.
+
 ## 29. Paskutinės sesijos santrauka
 
 ### 2026-10-04
@@ -467,4 +472,10 @@ Nereikia kiekvieną kartą perrašyti viso failo. Keisti tik informaciją, kuri 
 - `dist` build failai atskirti nuo redaguotinų šaltinio failų.
 - `package.json`, `package-lock.json`, `README.md`, `vite.config.js`, `eslint.config.js` ir `index.html` peržiūrėti; visas `src/assets` katalogas ir praktinis paleidimo / build testas netikrinti.
 - `README.md` sinchronizuotas su šiuo kontekstu; dokumentus ateityje atnaujinti pasikeitus funkcijoms.
+
+### 2026-10-10 — navigacija
+- `App.jsx` ir `App.css` pakeisti tik navigacijai ir išdėstymui: šoninė juosta pakeista viršutine, turinys centruotas.
+- Patikrinti abu navigacijos mygtukai, desktop ir mobilus meniu (uždarymas pasirinkus, paspaudus išorėje ir `Escape`).
+- `npm run build` pavyko. `npm run lint` vis dar praneša apie ankstesnę pastabų išskleidimo būseną `PlaceRow` – šis kodas nebuvo keistas.
+- `context.md` ir `README.md` suderinti su nauju išdėstymu.
 

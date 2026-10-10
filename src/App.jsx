@@ -94,6 +94,20 @@ function MenuIcon({ open }) {
   )
 }
 
+function BrandWave() {
+  return (
+    <svg className="top-nav-wave" viewBox="0 0 120 12" aria-hidden="true">
+      <path
+        d="M2 8c8-8 16 8 24 0s16 8 24 0 16 8 24 0 16 8 24 0 16 8 24 0"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
 function StarIcon({ filled }) {
   return (
     <svg className="place-favorite-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -540,7 +554,35 @@ function App() {
     <main className="page">
       <img className="page-bg" src={coastBg} alt="" />
       <div className="page-layout">
-        <div className="mobile-bar" ref={mobileNavRef}>
+        <header className="top-nav" ref={mobileNavRef}>
+          <div className="top-nav-brand">
+            <p className="top-nav-title">Mano vietos</p>
+            <BrandWave />
+          </div>
+          <nav className="top-nav-links" aria-label="Pagrindinė navigacija">
+            <button
+              type="button"
+              className="nav-link"
+              aria-current={view === 'home' ? 'page' : undefined}
+              onClick={() => setView('home')}
+            >
+              <span className="nav-link-icon" aria-hidden="true">
+                🏠
+              </span>
+              Pagrindinis
+            </button>
+            <button
+              type="button"
+              className="nav-link"
+              aria-current={view === 'all' ? 'page' : undefined}
+              onClick={openAllPlaces}
+            >
+              <span className="nav-link-icon" aria-hidden="true">
+                🗺️
+              </span>
+              Visos vietos
+            </button>
+          </nav>
           <button
             type="button"
             className="nav-toggle"
@@ -559,50 +601,35 @@ function App() {
             >
               <button
                 type="button"
-                className="sidebar-link"
+                className="nav-link"
                 aria-current={view === 'home' ? 'page' : undefined}
                 onClick={() => {
                   setView('home')
                   setNavOpen(false)
                 }}
               >
+                <span className="nav-link-icon" aria-hidden="true">
+                  🏠
+                </span>
                 Pagrindinis
               </button>
               <button
                 type="button"
-                className="sidebar-link"
+                className="nav-link"
                 aria-current={view === 'all' ? 'page' : undefined}
                 onClick={() => {
                   openAllPlaces()
                   setNavOpen(false)
                 }}
               >
+                <span className="nav-link-icon" aria-hidden="true">
+                  🗺️
+                </span>
                 Visos vietos
               </button>
             </nav>
           )}
-        </div>
-        <aside className="sidebar">
-          <p className="sidebar-brand">Mano vietos</p>
-          <nav className="sidebar-nav" aria-label="Pagrindinė navigacija">
-            <button
-              type="button"
-              className="sidebar-link"
-              aria-current={view === 'home' ? 'page' : undefined}
-              onClick={() => setView('home')}
-            >
-              Pagrindinis
-            </button>
-            <button
-              type="button"
-              className="sidebar-link"
-              aria-current={view === 'all' ? 'page' : undefined}
-              onClick={openAllPlaces}
-            >
-              Visos vietos
-            </button>
-          </nav>
-        </aside>
+        </header>
         <section className="places">
         {view === 'all' ? (
           <>
