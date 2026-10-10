@@ -1,175 +1,21 @@
-# Mano vietos
+# Mano vietos 🌊
 
-Asmeninė **React + Vite** programėlė vietoms saugoti, aplankytoms vietoms žymėti ir kelionių planavimui.
+**„Mano vietos“** – asmeninė lietuviška React + Vite programėlė, skirta išsaugoti vietas, kuriose jau buvai arba kurias norėtum aplankyti, ir lengviau susiplanuoti keliones. Projektas veikia naršyklėje, o duomenys išsaugomi jos `localStorage`.
 
-Programėlėje galima išsisaugoti dominančias vietas, nurodyti miestą ir šalį, pažymėti ar vieta jau aplankyta, ieškoti bei filtruoti išsaugotas vietas ir rasti, ką aplankyti pasirinktoje kelionės kryptyje.
+## Ką galima daryti?
 
-## Funkcionalumas
+- **Pridėti vietą:** įrašyti pavadinimą, pasirinkti kategoriją, nurodyti miestą, šalį ir pastabas.
+- **Valdyti vietas:** keisti informaciją, ištrinti įrašą, perjungti būseną tarp `❤️ Noriu aplankyti` ir `✅ Aplankyta`.
+- **Pažymėti mėgstamiausias:** žvaigždutės mygtuku įjungti arba išjungti `favorite` žymą.
+- **Skaityti pastabas:** ilgos pastabos kortelėje sutrumpinamos, jas galima išskleisti „Rodyti daugiau“ ir vėl suskleisti.
+- **Matyti naujausias vietas:** pagrindiniame ekrane pateikiami trys naujausi įrašai ir bendras jų skaičius.
+- **Atidaryti „Visos vietos“:** ieškoti pagal pavadinimą ir filtruoti pagal kategoriją.
+- **Naudoti „Kur keliaujam šiandien?“:** įvesti miestą ar šalį, rasti toje vietovėje išsaugotas vietas ir filtruoti rezultatus: **Visos**, **Noriu aplankyti**, **Aplankytos**, **Mėgstamiausios**. Kiekvienas filtras rodo atitinkančių vietų skaičių.
+- **Gauti automatiškai surastą paveikslėlį:** pridėjus vietą arba pakeitus jos pavadinimą / miestą / šalį, programa mėgina surasti nuotrauką per išorinius viešus šaltinius.
 
-Šiuo metu programėlėje galima:
-
-- pridėti naują vietą;
-- įvesti vietos pavadinimą, miestą ir šalį;
-- pasirinkti vieną iš 8 kategorijų;
-- pažymėti vietą kaip `Noriu aplankyti` arba `Aplankyta`;
-- redaguoti išsaugotą vietą;
-- ištrinti išsaugotą vietą;
-- išsaugoti vietas naršyklės `localStorage`;
-- matyti bendrą išsaugotų vietų skaičių;
-- pagrindiniame ekrane matyti 3 naujausiai pridėtas vietas;
-- atidaryti visų vietų sąrašą;
-- ieškoti vietų pagal pavadinimą;
-- filtruoti vietas pagal kategoriją;
-- ieškoti išsaugotų vietų pagal miestą arba šalį;
-- filtruoti kelionės paieškos rezultatus pagal būseną;
-- automatiškai ieškoti vietai tinkamo paveikslėlio.
-
-## Technologijos
-
-Projektas naudoja:
-
-- React 19;
-- React DOM 19;
-- Vite 8;
-- JavaScript;
-- JSX;
-- React Hooks;
-- CSS;
-- ESLint.
-
-Papildomi UI frameworkai ar state management bibliotekos nenaudojami.
-
-## Projekto paleidimas
-
-Reikalingas įdiegtas **Node.js** ir **npm**.
-
-Įdiek projekto priklausomybes:
-
-    npm install
-
-Paleisk projektą:
-
-    npm run dev
-
-Vite terminale parodys lokalų adresą, kuriuo galima atidaryti programėlę naršyklėje.
-
-### Kitos komandos
-
-Sukurti produkcinę versiją:
-
-    npm run build
-
-Patikrinti kodą su ESLint:
-
-    npm run lint
-
-Peržiūrėti produkcinę versiją lokaliai:
-
-    npm run preview
-
-## Projekto struktūra
-
-    pirmas-projektas/
-    ├── dist/
-    ├── node_modules/
-    ├── public/
-    │   ├── favicon.svg
-    │   └── icons.svg
-    ├── references/
-    ├── src/
-    │   ├── assets/
-    │   │   ├── coast-background.png
-    │   │   └── places/
-    │   ├── App.jsx
-    │   ├── App.css
-    │   ├── Rating.jsx
-    │   ├── Rating.css
-    │   ├── findPlaceImage.js
-    │   ├── matchLocation.js
-    │   ├── placeStorage.js
-    │   ├── index.css
-    │   └── main.jsx
-    ├── .gitignore
-    ├── agent.md
-    ├── eslint.config.js
-    ├── index.html
-    ├── package-lock.json
-    ├── package.json
-    ├── README.md
-    └── vite.config.js
-
-## Pagrindinis komponentas
-
-### `src/App.jsx`
-
-`App.jsx` yra pagrindinis programėlės komponentas.
-
-Jis valdo:
-
-- naujos vietos formą;
-- vietų sąrašą;
-- vietos pridėjimą;
-- vietos redagavimą;
-- vietos ištrynimą;
-- vietos būsenos keitimą;
-- vietų išsaugojimą;
-- naujausių vietų rodymą;
-- visų vietų vaizdą;
-- paiešką pagal vietos pavadinimą;
-- filtravimą pagal kategoriją;
-- automatinės paveikslėlio paieškos paleidimą.
-
-Pagrindinės React būsenos:
-
-- `name`
-- `category`
-- `city`
-- `country`
-- `places`
-- `view`
-- `search`
-- `categoryFilter`
-
-## Vietos duomenų modelis
-
-Kiekviena vieta turi tokią struktūrą:
-
-    {
-      id,
-      name,
-      category,
-      city,
-      country,
-      image,
-      status
-    }
-
-Laukų paskirtis:
-
-- `id` — unikalus vietos identifikatorius;
-- `name` — vietos pavadinimas;
-- `category` — vietos kategorija;
-- `city` — miestas;
-- `country` — šalis;
-- `image` — vietos paveikslėlio URL arba lokalus paveikslėlis;
-- `status` — vietos būsena.
-
-Naujos vartotojo pridėtos vietos ID generuojamas naudojant `Date.now()`.
-
-## Vietų būsenos
-
-Naudojamos dvi būsenos:
-
-- `❤️ Noriu aplankyti`
-- `✅ Aplankyta`
-
-Naujai pridėta vieta automatiškai gauna būseną `Noriu aplankyti`.
-
-Paspaudus būsenos žymą vietos kortelėje, būsena pakeičiama į kitą.
+Sąsaja turi dvi skiltis – **Pagrindinis** ir **Visos vietos**. Kompiuteryje navigacija yra kairėje, mažesniuose ekranuose – išskleidžiamame meniu. Perjungimas vyksta React būsena (`view`), be puslapio perkrovimo ir be React Router.
 
 ## Vietų kategorijos
-
-Programėlėje naudojamos 8 kategorijos:
 
 1. 🍽️ Kavinės ir restoranai
 2. 🏛️ Lankytinos vietos
@@ -180,288 +26,113 @@ Programėlėje naudojamos 8 kategorijos:
 7. 🌙 Barai ir naktinis gyvenimas
 8. 💆 SPA ir poilsis
 
-## Duomenų saugojimas
-
-Vietos saugomos naršyklės `localStorage`.
-
-Naudojamas raktas:
-
-    mano-vietos-places
-
-Už duomenų saugojimą atsakingas `src/placeStorage.js`.
-
-Jis:
-
-- saugo kategorijų sąrašą;
-- saugo galimas vietų būsenas;
-- normalizuoja vietų duomenis;
-- suderina kai kuriuos senesnius kategorijų pavadinimus;
-- užkrauna vietas iš `localStorage`;
-- išsaugo vietas į `localStorage`.
-
-Jeigu `localStorage` dar nėra duomenų arba išsaugoti duomenys netinkami, naudojamos dvi pradinės vietos:
-
-- Pilies kavinė — Vilnius, Lietuva;
-- Trakų pilis — Trakai, Lietuva.
-
-## Vietos pridėjimas
-
-Pagrindiniame ekrane yra forma „Pridėti vietą“.
-
-Galima nurodyti:
-
-- vietos pavadinimą;
-- kategoriją;
-- miestą;
-- šalį.
-
-Vietos pavadinimas yra būtinas.
-
-Miestą ir šalį galima palikti tuščius.
-
-Pridėjus vietą:
-
-1. ji iš karto įtraukiama į vietų sąrašą;
-2. jai priskiriama būsena `Noriu aplankyti`;
-3. paveikslėlio reikšmė iš pradžių yra tuščia;
-4. paleidžiama automatinė paveikslėlio paieška;
-5. radus paveikslėlį vietos duomenys atnaujinami.
-
-## Vietos redagavimas ir ištrynimas
-
-Kiekviena vietos kortelė turi papildomų veiksmų meniu.
-
-Galimi veiksmai:
-
-- `Redaguoti`;
-- `Ištrinti`.
-
-Redaguojant vietą galima pakeisti:
-
-- pavadinimą;
-- kategoriją;
-- miestą;
-- šalį.
-
-Jeigu pakeičiamas vietos pavadinimas, miestas arba šalis, senas paveikslėlis pašalinamas ir paleidžiama nauja paveikslėlio paieška.
-
-Papildomų veiksmų meniu galima uždaryti:
-
-- paspaudus už meniu ribų;
-- paspaudus `Escape`.
-
-## Išsaugotos vietos
-
-Pagrindiniame ekrane rodoma:
-
-- bendra išsaugotų vietų suma;
-- 3 naujausiai pridėtos vietos.
-
-Jeigu vietų nėra, rodomas pranešimas:
-
-    Išsaugotų vietų dar nėra.
-
-Mygtukas „Peržiūrėti visas vietas“ atidaro atskirą visų vietų vaizdą.
-
-## „Visos vietos“ vaizdas
-
-Visų vietų vaizde galima:
-
-- matyti visas išsaugotas vietas;
-- ieškoti pagal vietos pavadinimą;
-- filtruoti pagal kategoriją;
-- pakeisti vietos būseną;
-- redaguoti vietą;
-- ištrinti vietą;
-- grįžti į pagrindinį ekraną.
-
-Vietos rodomos nuo naujausiai pridėtos iki seniausios.
-
-Jeigu pagal pasirinktą paiešką ar filtrą nieko nerandama, rodoma:
-
-    Tinkamų vietų nerasta.
-
-## „Kur keliaujam šiandien?“ funkcija
-
-`src/Rating.jsx` šiuo metu naudojamas kelionės krypties paieškai.
-
-Komponento pavadinimas kode yra `RandomPlace`.
-
-Vartotojas gali įvesti miestą arba šalį ir paspausti:
-
-    Rodyti vietas
-
-Paieška tikrina:
-
-- vietos miestą;
-- šalį;
-- vietos pavadinimą.
-
-Įvedimo laukas taip pat siūlo miestus ir šalis iš jau išsaugotų vietų.
-
-Paieškos rezultatus galima filtruoti:
-
-- `Visos`;
-- `❤️ Noriu aplankyti`;
-- `✅ Aplankytos`.
-
-Prie kiekvieno filtro rodomas atitinkančių vietų skaičius.
-
-Jeigu paieškos laukas tuščias, rodoma:
-
-    Įrašykite miestą arba šalį.
-
-Jeigu pasirinktoje vietovėje išsaugotų vietų nėra, rodoma:
-
-    Šioje vietovėje tinkamų išsaugotų vietų dar nėra.
-
-## Vietovių atpažinimas
-
-Už vietovių paiešką atsakingas `src/matchLocation.js`.
-
-Paieškos tekstas:
-
-- paverčiamas mažosiomis raidėmis;
-- normalizuojamas;
-- iš jo pašalinami diakritiniai ženklai;
-- leidžiami daliniai atitikmenys.
-
-Taip pat palaikomi keli miestų ir šalių variantai.
-
-Pavyzdžiai:
-
-- Lietuva ↔ Lithuania;
-- Italija ↔ Italy / Italia;
-- Ispanija ↔ Spain / España;
-- Vilnius ↔ Vilniaus;
-- Trakai ↔ Trakų;
-- Nida ↔ Nidos;
-- Klaipėda ↔ Klaipėdos.
-
-`destinationOptions()` surenka unikalius miestų ir šalių pavadinimus iš išsaugotų vietų ir surikiuoja juos pagal lietuvišką lokalę.
-
-## Automatinė vietos paveikslėlio paieška
-
-Už automatinę paveikslėlio paiešką atsakingas `src/findPlaceImage.js`.
-
-Naudojami šaltiniai:
-
-- Wikimedia Commons;
-- Wikipedia;
-- Openverse.
-
-Jeigu reikia, lietuviška paieškos užklausa gali būti išversta į anglų kalbą naudojant MyMemory vertimo API.
-
-Paveikslėlio paieška pirmiausia bando naudoti:
-
-- vietos pavadinimą;
-- miestą;
-- šalį;
-- anglišką šalies pavadinimą.
-
-Paieškos rezultatai vertinami pagal žodžių sutapimą ir vietovės informaciją.
-
-Jeigu konkrečios vietos paveikslėlio rasti nepavyksta, bandoma:
-
-1. ieškoti pagal miestą arba šalį;
-2. naudoti kategorijai tinkantį bendresnį paveikslėlį.
-
-Palaikomi kategorijų fallback paveikslėliai visoms 8 kategorijoms.
-
-Paveikslėlių užklausos sesijos metu saugomos atminties cache, kad tos pačios užklausos nereikėtų kartoti.
-
-Šiai funkcijai reikalingas interneto ryšys, nes naudojami išoriniai API.
+## Technologijos
+
+- **React** `^19.2.8` ir **React DOM** `^19.2.8`
+- **Vite** `^8.3.0` ir `@vitejs/plugin-react`
+- **JavaScript**, **JSX**, React Hooks
+- Įprastas **CSS** ir **ESLint** `^10.10.0`
+
+Projekte nėra TypeScript, Tailwind CSS, React Router, serverio, duomenų bazės ar prisijungimo sistemos.
+
+## Paleidimas kompiuteryje
+
+Reikia **Node.js** ir **npm**. Atidaryk projekto aplanką terminale ir vykdyk:
+
+```bash
+npm install
+npm run dev
+```
+
+Terminale pateiktą lokalų Vite adresą atidaryk naršyklėje (dažnai `http://localhost:5173/`).
+
+Kitos komandos:
+
+```bash
+npm run build     # sukuria produkcinę versiją (dist/)
+npm run preview   # vietinė sukompiliuotos versijos peržiūra
+npm run lint      # ESLint patikra
+```
+
+## Projekto struktūra
+
+```text
+pirmas-projektas/
+├── public/
+│   ├── favicon.svg
+│   └── icons.svg
+├── src/
+│   ├── assets/
+│   │   ├── coast-background.png
+│   │   └── places/             # pavyzdžių paveikslėliai
+│   ├── App.jsx                 # ekranai, vietų CRUD, navigacija
+│   ├── App.css                 # puslapis, kortelės, responsive stiliai
+│   ├── Rating.jsx              # „Kur keliaujam šiandien?“ komponentas
+│   ├── Rating.css
+│   ├── findPlaceImage.js       # automatinė paveikslėlių paieška
+│   ├── matchLocation.js        # miestų / šalių atpažinimas
+│   ├── placeStorage.js         # localStorage ir duomenų normalizavimas
+│   ├── index.css
+│   └── main.jsx
+├── index.html
+├── package.json
+├── package-lock.json
+├── vite.config.js
+├── eslint.config.js
+├── README.md
+├── agent.md
+└── context.md
+```
+
+Tai pagrindinių failų orientyras pagal pateiktą šaltinio kodą, ne būtinai visas katalogo medis. `dist/` ir `node_modules/` yra sugeneruojami / įdiegiami, jų rankiniu būdu redaguoti nereikia.
+
+## Kaip saugomi duomenys?
+
+`src/placeStorage.js` naudoja `localStorage` raktą:
+
+```text
+mano-vietos-places
+```
+
+Vietos objektas turi šiuos laukus:
+
+```js
+{
+  id,
+  name,
+  category,
+  city,
+  country,
+  image,
+  status,
+  favorite,
+  notes
+}
+```
+
+- Nauja vieta gauna `Noriu aplankyti` būseną, `favorite: false` ir įvestas pastabas.
+- Senesni įrašai normalizuojami: jei nėra mėgstamiausios žymos ar pastabų, naudojama `false` ir tuščia eilutė.
+- Jei `localStorage` dar neturi įrašų arba jie negaliojantys, naudojami pavyzdžiai **Pilies kavinė** ir **Trakų pilis**.
+- Vietos išsaugomos **tik toje naršyklėje / jos profilyje**. Duomenų sinchronizavimo tarp įrenginių nėra. Išvalius naršyklės svetainės duomenis, išsaugotos vietos gali dingti.
+
+## Kaip veikia nuotraukos?
+
+`findPlaceImage.js` bando surasti tinkamą paveikslėlį per **Wikimedia Commons**, **Wikipedia** ir **Openverse**. Prireikus užklausa gali būti verčiama naudojant **MyMemory** paslaugą. Tai priklauso nuo interneto, viešų API veikimo ir paieškos rezultatų – tinkama nuotrauka ne visada randama.
+
+Pakeitus vietos **pavadinimą, miestą ar šalį**, ankstesnis paveikslėlis pašalinamas ir paleidžiama nauja paieška. Vien pakeitus pastabas ar kategoriją, automatinė pakartotinė nuotraukos paieška šiame kode nepaleidžiama.
 
 ## Dizainas
 
-Programėlė turi pajūrio ir kelionių tematikos dizainą.
+Dizainas paremtas pajūrio nuotrauka, šviesiomis pusiau permatomomis kortelėmis, „glassmorphism“ / `backdrop-filter: blur(...)` efektu, užapvalintais kampais, tamsiai mėlynu tekstu ir melsvai žaliu akcentu. Naudojamas **Plus Jakarta Sans** šriftas. Responsive taisyklės pritaiko išdėstymą mažiems ekranams.
 
-Pagrindiniai dizaino elementai:
+## Techninės ribos ir ateities galimybės
 
-- viso puslapio pajūrio foninis paveikslėlis;
-- centruotas turinys;
-- maksimalus pagrindinio turinio plotis apie `500px`;
-- šviesios pusiau permatomos kortelės;
-- `backdrop-filter: blur(10px)`;
-- stipriai užapvalinti kampai;
-- subtilūs šešėliai;
-- tamsiai mėlyna pagrindinė tipografija;
-- melsvai žalias akcentas;
-- dideli formų laukeliai ir mygtukai.
+Dabartinė programėlė yra **frontend-only**, skirta asmeniniam naudojimui; be autentifikacijos, backend, duomenų bazės ir debesų sinchronizacijos. Platesnė vietų paieška, bendrinimas ar kelių vartotojų paskyros – galimos ateities kryptys, **ne dabartinės funkcijos**.
 
-Naudojamas šriftas:
+## Dokumentacijos priežiūra
 
-- **Plus Jakarta Sans**
+- **`context.md`** – išsamus projekto kontekstas Cursor / AI: struktūra, duomenys, taisyklės, techniniai sprendimai.
+- **`README.md`** – suprantama projekto apžvalga ir paleidimo instrukcijos.
+- **`agent.md`** – instrukcijos AI agentui, kurios neturi prieštarauti dabartiniam kodui.
 
-Pagrindinės spalvos:
-
-- pagrindinis tekstas: `#163a56`;
-- antrinis tekstas: `#5d7384`;
-- pagrindinis akcentas: `#2c8a96`;
-- hover akcentas: `#247a85`.
-
-Programėlė naudoja šviesų `color-scheme`.
-
-## Responsive dizainas
-
-Programėlė pritaikyta mažesniems ekranams.
-
-Pagrindinis responsive breakpoint:
-
-    520px
-
-Mažesniame ekrane:
-
-- sumažinami puslapio tarpai;
-- sumažinami kortelių paddingai;
-- miesto ir šalies laukai iš dviejų stulpelių pereina į vieną;
-- šiek tiek sumažinama vietos būsenos žyma.
-
-„Kur keliaujam šiandien?“ komponentas turi papildomą breakpoint:
-
-    420px
-
-Jame mažesniame ekrane sumažinamas dekoratyvinis kelio ženklas ir antraštės dydis.
-
-## Accessibility
-
-Kode naudojami keli accessibility sprendimai:
-
-- formų `label` susieti su laukais naudojant `htmlFor`;
-- naudojami `aria-label`;
-- naudojamas `aria-pressed`;
-- naudojamas `aria-expanded`;
-- naudojamas `aria-haspopup`;
-- veiksmų meniu naudoja `role="menu"` ir `role="menuitem"`;
-- būsenų filtrai naudoja `role="tab"` ir `aria-selected`;
-- tuščios būsenos pranešimai naudoja `role="status"`;
-- dekoratyviniai SVG elementai turi `aria-hidden="true"`;
-- klaviatūros fokusui naudojamas `:focus-visible`.
-
-Fokusuojamiems mygtukams, įvedimo laukams ir pasirinkimo laukams rodomas aiškus outline.
-
-## Pagrindinis aplikacijos įėjimo taškas
-
-`src/main.jsx`:
-
-- importuoja globalų `index.css`;
-- importuoja `App`;
-- aplikaciją renderina į `#root`;
-- naudoja React `StrictMode`.
-
-## Dabartinės techninės ribos
-
-Šiuo metu projektas:
-
-- yra frontend-only aplikacija;
-- duomenis saugo tik vartotojo naršyklėje;
-- neturi vartotojų paskyrų;
-- neturi prisijungimo ar autentifikacijos;
-- neturi serverinės duomenų bazės;
-- neturi debesų sinchronizacijos;
-- neturi React Router;
-- neturi TypeScript;
-- neturi Tailwind CSS;
-- neturi papildomos globalios state management bibliotekos.
-
-Todėl skirtinguose įrenginiuose išsaugotos vietos automatiškai nesinchronizuojamos.
+**Paskutinį kartą atnaujinta:** 2026-10-10 pagal pateiktus šaltinio failus. Funkcijos aprašytos pagal kodą; atskiras veikiančios aplikacijos ar `npm run build` testas nebuvo atliktas.
